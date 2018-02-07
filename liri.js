@@ -70,10 +70,24 @@ function twitter() {
 //Creating a function for when the user requests information about a song
 
 function spotifySong() {
+  if (arg[3] == null) {
+    spotify.request('https://api.spotify.com/v1/tracks/0hrBpAOgrt8RXigk83LLNE')
+    .then(function(data) {
+      songObject = new Object();
+        songObject.songName = "The Sign";
+        songObject.songAlbum = 'The Sign (US Album) [Remastered]';
+        songObject.songPreview = 'https://p.scdn.co/mp3-preview/4c463359f67dd3546db7294d236dd0ae991882ff?cid=348f6d5d529a4ed9aa243f1167bd57e8';
+        songObject.artist = "Ace of Base"
 
-  //Creating a loop that will be able to consume a ful song name
+        console.log(songObject);
+  })
+  .catch(function(err) {
+    console.error('Error occurred: ' + err);
+  });
+} else {
+  //Creating a loop that will be able to consume a full song name
 
-  for (var i = 4; i < arg.length; i++) {
+  for (var i = 3; i < arg.length; i++) {
     songName = songName + "+" + arg[i];
   }
 
@@ -117,6 +131,9 @@ function spotifySong() {
       // * If no song is provided then your program will default to "The Sign" by Ace of Base.
     } // end the else statement
   }); // end the spotify search
+}
+
+
 } //End Spotify function
 
 function omdbSearch() {
@@ -246,5 +263,4 @@ function readFile() {
       console.log(dataArr);
     }
   })
-
 }
